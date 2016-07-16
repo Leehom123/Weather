@@ -67,8 +67,8 @@ public class WeatherDB {
 	public void saveCity(City city){
 		if (city!=null) {
 			ContentValues values = new ContentValues();
-			values.put("province_name", city.getCityName());
-			values.put("province_code", city.getCityCode());
+			values.put("city_name", city.getCityName());
+			values.put("city_code", city.getCityCode());
 			values.put("province_id", city.getProvinceId());
 			db.insert("City", null, values);
 		}
@@ -95,16 +95,16 @@ public class WeatherDB {
 	public void saveCounty(County county){
 		if (county!=null) {
 			ContentValues values = new ContentValues();
-			values.put("province_name", county.getCountyName());
-			values.put("province_code", county.getCountyCode());
-			values.put("citi_id", county.getCityId());
+			values.put("county_name", county.getCountyName());
+			values.put("county_code", county.getCountyCode());
+			values.put("city_id", county.getCityId());
 			db.insert("county", null, values);
 		}
 	}
 	//从数据库读取某城市下所有县信息。
 	public List <County> loadCounties(int cityid){
 		List<County> list=new ArrayList<County>();
-		Cursor cursor= db.query("City", null, "city_id=?", new String[]{String.valueOf(cityid)}, null, null, null);
+		Cursor cursor= db.query("County", null, "city_id=?", new String[]{String.valueOf(cityid)}, null, null, null);
 		if (cursor.moveToFirst()) {
 			do{
 				County county = new County();
